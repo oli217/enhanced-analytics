@@ -7,12 +7,26 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
+use Inertia\Inertia;
 
 class AnalyticsDashboardController
 {
     public function index()
     {
-        return view('enhanced-analytics::dashboard');
+        return Inertia::render('EnhancedAnalytics/Dashboard', [
+            'config' => [
+                'refreshInterval'    => config('enhanced-analytics.dashboard.refresh_interval', 300),
+                'cacheDuration'      => config('enhanced-analytics.geolocation.cache_duration', 1440),
+                'rateLimit'          => config('enhanced-analytics.geolocation.rate_limit', 45),
+                'processingFrequency'=> config('enhanced-analytics.processing.frequency', 15),
+                'routes' => [
+                    'data'       => cp_route('enhanced-analytics.data'),
+                    'export'     => cp_route('enhanced-analytics.export'),
+                    'clearCache' => cp_route('enhanced-analytics.clear-cache'),
+                    'geoStats'   => cp_route('enhanced-analytics.geo-stats'),
+                ],
+            ],
+        ]);
     }
 
     public function getData(Request $request)

@@ -71,7 +71,7 @@ class ServiceProvider extends AddonServiceProvider
             $nav->create('Analytics')
                 ->section('Tools')
                 ->route('enhanced-analytics.index')
-                ->icon('charts');
+                ->icon('chart-monitoring-indicator');
         });
 
         // Load migrations
@@ -102,11 +102,6 @@ class ServiceProvider extends AddonServiceProvider
 
                 if (!File::exists($path)) {
                     File::makeDirectory($path, $permissions, true);
-                }
-
-                // Ensure proper permissions
-                if (File::exists($path)) {
-                    chmod($path, $permissions);
                 }
             }
         } catch (\Exception $e) {

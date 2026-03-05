@@ -1,6 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Tailwind v4 — utilitaires uniquement (pas de preflight pour éviter les conflits avec le CP Statamic) */
+@import "tailwindcss/utilities";
+@source "../js/**/*.vue";
+@source "../views/**/*.antlers.html";
 
 :root {
     /* Base Colors */

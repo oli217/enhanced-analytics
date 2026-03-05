@@ -40,11 +40,11 @@
     },
     "require": {
         "php": "^8.3",
-        "statamic/cms": "^5.0",
+        "statamic/cms": "^6.0",
         "jenssegers/agent": "^2.6"
     },
     "require-dev": {
-        "orchestra/testbench": "^9.0"
+        "orchestra/testbench": "^10.0"
     },
     "config": {
         "allow-plugins": {
