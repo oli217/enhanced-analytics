@@ -5,14 +5,14 @@
         <div class="ea-header">
             <div class="ea-controls">
                 <select v-model="dateRange" @change="onDateRangeChange" class="ea-select">
-                    <option value="24hours">Last 24 Hours</option>
-                    <option value="7days">Last 7 Days</option>
-                    <option value="30days">Last 30 Days</option>
-                    <option value="custom">Custom Range</option>
+                    <option value="24hours">{{ t('last_24_hours') }}</option>
+                    <option value="7days">{{ t('last_7_days') }}</option>
+                    <option value="30days">{{ t('last_30_days') }}</option>
+                    <option value="custom">{{ t('custom_range') }}</option>
                 </select>
                 <div v-if="dateRange === 'custom'" class="ea-controls">
                     <input type="date" v-model="startDate" @change="fetchData" class="ea-input">
-                    <span class="ea-text-lg">to</span>
+                    <span class="ea-text-lg">{{ t('date_to') }}</span>
                     <input type="date" v-model="endDate" @change="fetchData" class="ea-input">
                 </div>
             </div>
@@ -21,70 +21,70 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                     </svg>
-                    Refresh Data
+                    {{ t('refresh_data') }}
                 </button>
                 <button @click="exportData" class="ea-btn ea-btn-success">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                     </svg>
-                    Export Data
+                    {{ t('export_data') }}
                 </button>
                 <button @click="showSettings = !showSettings" class="ea-btn">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                     </svg>
-                    Settings
+                    {{ t('settings') }}
                 </button>
             </div>
         </div>
 
         <!-- Settings Panel -->
         <div v-if="showSettings" class="ea-card">
-            <h3 class="ea-text-xl ea-mb-4">Analytics Settings</h3>
+            <h3 class="ea-text-xl ea-mb-4">{{ t('analytics_settings') }}</h3>
             <div class="ea-grid ea-grid-cols-2 ea-gap-8">
                 <div class="ea-space-y-4">
-                    <h4 class="ea-text-lg ea-font-semibold">Geolocation Stats</h4>
+                    <h4 class="ea-text-lg ea-font-semibold">{{ t('geolocation_stats') }}</h4>
                     <div class="ea-space-y-2">
                         <div class="ea-flex ea-justify-between">
-                            <span class="ea-text-secondary">Total Lookups:</span>
+                            <span class="ea-text-secondary">{{ t('total_lookups') }}</span>
                             <span class="ea-font-medium">{{ geoStats.total_lookups.toLocaleString() }}</span>
                         </div>
                         <div class="ea-flex ea-justify-between">
-                            <span class="ea-text-secondary">Success Rate:</span>
+                            <span class="ea-text-secondary">{{ t('success_rate') }}</span>
                             <span class="ea-font-medium">{{ geoSuccessRate }}</span>
                         </div>
                         <div class="ea-flex ea-justify-between">
-                            <span class="ea-text-secondary">Unique IPs:</span>
+                            <span class="ea-text-secondary">{{ t('unique_ips') }}</span>
                             <span class="ea-font-medium">{{ geoStats.unique_ips.length.toLocaleString() }}</span>
                         </div>
                         <div class="ea-flex ea-justify-between">
-                            <span class="ea-text-secondary">Last Lookup:</span>
+                            <span class="ea-text-secondary">{{ t('last_lookup') }}</span>
                             <span class="ea-font-medium">{{ geoLastLookup }}</span>
                         </div>
                     </div>
                     <button @click="clearGeoCache" :disabled="clearingCache" class="ea-btn ea-btn-primary ea-mt-4">
-                        {{ clearingCache ? 'Clearing...' : 'Clear Geo Cache' }}
+                        {{ clearingCache ? t('clearing') : t('clear_geo_cache') }}
                     </button>
                 </div>
                 <div class="ea-space-y-4">
-                    <h4 class="ea-text-lg ea-font-semibold">Current Configuration</h4>
+                    <h4 class="ea-text-lg ea-font-semibold">{{ t('current_configuration') }}</h4>
                     <div class="ea-space-y-2">
                         <div class="ea-flex ea-justify-between">
-                            <span class="ea-text-secondary">Cache Duration:</span>
-                            <span class="ea-font-medium">{{ config.cacheDuration }} minutes</span>
+                            <span class="ea-text-secondary">{{ t('cache_duration') }}</span>
+                            <span class="ea-font-medium">{{ config.cacheDuration }} {{ t('minutes') }}</span>
                         </div>
                         <div class="ea-flex ea-justify-between">
-                            <span class="ea-text-secondary">Rate Limit:</span>
-                            <span class="ea-font-medium">{{ config.rateLimit }} requests/minute</span>
+                            <span class="ea-text-secondary">{{ t('rate_limit') }}</span>
+                            <span class="ea-font-medium">{{ config.rateLimit }} {{ t('requests_per_minute') }}</span>
                         </div>
                         <div class="ea-flex ea-justify-between">
-                            <span class="ea-text-secondary">Processing:</span>
-                            <span class="ea-font-medium">Every {{ config.processingFrequency }} minutes</span>
+                            <span class="ea-text-secondary">{{ t('processing') }}</span>
+                            <span class="ea-font-medium">{{ t('every_x_minutes', { count: config.processingFrequency }) }}</span>
                         </div>
                         <div class="ea-flex ea-justify-between">
-                            <span class="ea-text-secondary">Dashboard Refresh:</span>
-                            <span class="ea-font-medium">{{ config.refreshInterval }} seconds</span>
+                            <span class="ea-text-secondary">{{ t('dashboard_refresh') }}</span>
+                            <span class="ea-font-medium">{{ config.refreshInterval }} {{ t('seconds') }}</span>
                         </div>
                     </div>
                 </div>
@@ -94,26 +94,26 @@
         <!-- Quick Stats Overview -->
         <div class="ea-grid ea-grid-cols-4">
             <div class="ea-card">
-                <h3 class="ea-font-semibold">Total Visits</h3>
+                <h3 class="ea-font-semibold">{{ t('total_visits') }}</h3>
                 <p class="ea-text-lg">{{ overview.totalVisits.toLocaleString() }}</p>
                 <p :class="['ea-text-secondary', 'text-sm', comparisonClass(overview.comparisons.total_visits, true)]">
                     {{ comparisonText(overview.comparisons.total_visits) }}
                 </p>
             </div>
             <div class="ea-card">
-                <h3 class="ea-font-semibold">Unique Visitors</h3>
+                <h3 class="ea-font-semibold">{{ t('unique_visitors') }}</h3>
                 <p class="ea-text-lg">{{ overview.uniqueVisitors.toLocaleString() }}</p>
                 <p :class="['ea-text-secondary', 'text-sm', comparisonClass(overview.comparisons.unique_visitors, true)]">
                     {{ comparisonText(overview.comparisons.unique_visitors) }}
                 </p>
             </div>
             <div class="ea-card">
-                <h3 class="ea-font-semibold">Engagement</h3>
+                <h3 class="ea-font-semibold">{{ t('engagement') }}</h3>
                 <p class="ea-text-lg">{{ formatDuration(overview.avgTimeOnSite) }}</p>
-                <p class="ea-text-secondary">avg. time on site</p>
+                <p class="ea-text-secondary">{{ t('avg_time_on_site') }}</p>
             </div>
             <div class="ea-card">
-                <h3 class="ea-font-semibold">Bounce Rate</h3>
+                <h3 class="ea-font-semibold">{{ t('bounce_rate') }}</h3>
                 <p class="ea-text-lg">{{ formatPercent(overview.bounceRate) }}</p>
                 <p :class="['ea-text-secondary', 'text-sm', comparisonClass(overview.comparisons.bounce_rate, false)]">
                     {{ comparisonText(overview.comparisons.bounce_rate) }}
@@ -124,28 +124,28 @@
         <!-- Visitor Engagement Metrics -->
         <div class="ea-grid ea-grid-cols-2">
             <div class="ea-card">
-                <h3 class="ea-font-bold">Visit Frequency</h3>
+                <h3 class="ea-font-bold">{{ t('visit_frequency') }}</h3>
                 <div class="ea-grid ea-grid-cols-2">
                     <div>
-                        <p class="ea-text-secondary">New Visitors</p>
+                        <p class="ea-text-secondary">{{ t('new_visitors') }}</p>
                         <p class="ea-text-lg">{{ engagement.newVisitors.toLocaleString() }}</p>
                     </div>
                     <div>
-                        <p class="ea-text-secondary">Returning Visitors</p>
+                        <p class="ea-text-secondary">{{ t('returning_visitors') }}</p>
                         <p class="ea-text-lg">{{ engagement.returningVisitors.toLocaleString() }}</p>
                     </div>
                     <div>
-                        <p class="ea-text-secondary">Pages/Session</p>
+                        <p class="ea-text-secondary">{{ t('pages_per_session') }}</p>
                         <p class="ea-text-lg">{{ engagement.pagesPerSession.toFixed(1) }}</p>
                     </div>
                     <div>
-                        <p class="ea-text-secondary">Avg. Session Duration</p>
+                        <p class="ea-text-secondary">{{ t('avg_session_duration') }}</p>
                         <p class="ea-text-lg">{{ formatDuration(engagement.avgSessionDuration) }}</p>
                     </div>
                 </div>
             </div>
             <div class="ea-card">
-                <h3 class="ea-font-bold">Page Views Over Time</h3>
+                <h3 class="ea-font-bold">{{ t('page_views_over_time') }}</h3>
                 <div class="ea-chart-wrapper">
                     <canvas ref="pageViewsChartEl"></canvas>
                 </div>
@@ -155,7 +155,7 @@
         <!-- Geographic & Technical Insights -->
         <div class="ea-grid ea-grid-cols-1">
             <div class="ea-card">
-                <h3 class="ea-font-bold">Top Countries</h3>
+                <h3 class="ea-font-bold">{{ t('top_countries') }}</h3>
                 <div class="ea-chart-wrapper">
                     <canvas ref="countryChartEl"></canvas>
                 </div>
@@ -163,9 +163,9 @@
                     <table class="ea-table">
                         <thead>
                             <tr>
-                                <th>Country</th>
-                                <th class="ea-text-right">Visits</th>
-                                <th class="ea-text-right">% of Total</th>
+                                <th>{{ t('country') }}</th>
+                                <th class="ea-text-right">{{ t('visits') }}</th>
+                                <th class="ea-text-right">{{ t('percent_of_total') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -179,13 +179,13 @@
                 </div>
             </div>
             <div class="ea-card">
-                <h3 class="ea-font-bold">Device Types</h3>
+                <h3 class="ea-font-bold">{{ t('device_types') }}</h3>
                 <div class="ea-chart-wrapper">
                     <canvas ref="deviceChartEl"></canvas>
                 </div>
             </div>
             <div class="ea-card">
-                <h3 class="ea-font-bold">Browser Usage</h3>
+                <h3 class="ea-font-bold">{{ t('browser_usage') }}</h3>
                 <div class="ea-chart-wrapper">
                     <canvas ref="browserChartEl"></canvas>
                 </div>
@@ -194,22 +194,22 @@
 
         <!-- Page Performance -->
         <div class="ea-card">
-            <h3 class="ea-font-bold">Page Performance</h3>
+            <h3 class="ea-font-bold">{{ t('page_performance') }}</h3>
             <div class="overflow-x-auto">
                 <table class="ea-table">
                     <thead>
                         <tr>
-                            <th>Page URL</th>
-                            <th>Views</th>
-                            <th>Unique Views</th>
-                            <th>Avg. Time</th>
-                            <th>Bounce Rate</th>
-                            <th>Exit Rate</th>
+                            <th>{{ t('page_url') }}</th>
+                            <th>{{ t('views') }}</th>
+                            <th>{{ t('unique_views') }}</th>
+                            <th>{{ t('avg_time') }}</th>
+                            <th>{{ t('bounce_rate') }}</th>
+                            <th>{{ t('exit_rate') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-if="topPages.length === 0">
-                            <td colspan="6" class="ea-text-center">Loading data...</td>
+                            <td colspan="6" class="ea-text-center">{{ t('loading_data') }}</td>
                         </tr>
                         <tr v-for="page in topPages" :key="page.page_url">
                             <td class="max-w-md truncate">{{ page.page_url }}</td>
@@ -226,27 +226,27 @@
 
         <!-- User Flow -->
         <div class="ea-card">
-            <h3 class="ea-font-bold">User Flow</h3>
+            <h3 class="ea-font-bold">{{ t('user_flow') }}</h3>
             <div class="ea-grid ea-grid-cols-3">
                 <div>
-                    <h4 class="ea-font-semibold">Top Entry Pages</h4>
-                    <p class="ea-text-muted">Entry points</p>
+                    <h4 class="ea-font-semibold">{{ t('top_entry_pages') }}</h4>
+                    <p class="ea-text-muted">{{ t('entry_points') }}</p>
                     <div v-for="page in userFlow.entry_pages" :key="page.page_url" class="flex justify-between items-center">
                         <span class="truncate">{{ page.page_url }}</span>
                         <span class="text-gray-500">{{ page.count.toLocaleString() }}</span>
                     </div>
                 </div>
                 <div>
-                    <h4 class="ea-font-semibold">Most Engaged Pages</h4>
-                    <p class="ea-text-muted">Highest engagement</p>
+                    <h4 class="ea-font-semibold">{{ t('most_engaged_pages') }}</h4>
+                    <p class="ea-text-muted">{{ t('highest_engagement') }}</p>
                     <div v-for="page in userFlow.engaged_pages" :key="page.url" class="flex justify-between items-center">
                         <span class="truncate">{{ page.url }}</span>
                         <span class="text-gray-500">{{ formatDuration(page.avg_time) }}</span>
                     </div>
                 </div>
                 <div>
-                    <h4 class="ea-font-semibold">Top Exit Pages</h4>
-                    <p class="ea-text-muted">Exit points</p>
+                    <h4 class="ea-font-semibold">{{ t('top_exit_pages') }}</h4>
+                    <p class="ea-text-muted">{{ t('exit_points') }}</p>
                     <div v-for="page in userFlow.exit_pages" :key="page.url" class="flex justify-between items-center">
                         <span class="truncate">{{ page.url }}</span>
                         <span class="text-gray-500">{{ formatPercent(page.exit_rate) }}</span>
@@ -267,7 +267,21 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    translations: {
+        type: Object,
+        default: () => ({}),
+    },
 })
+
+// ── i18n helper ───────────────────────────────────────────────────────────────
+
+function t(key, replacements = {}) {
+    let string = props.translations[key] ?? key
+    for (const [placeholder, value] of Object.entries(replacements)) {
+        string = string.replace(`:${placeholder}`, value)
+    }
+    return string
+}
 
 // UI state
 const dateRange  = ref('7days')
@@ -326,7 +340,7 @@ const geoSuccessRate = computed(() => {
 })
 
 const geoLastLookup = computed(() =>
-    geoStats.last_lookup ? new Date(geoStats.last_lookup).toLocaleString() : 'Never'
+    geoStats.last_lookup ? new Date(geoStats.last_lookup).toLocaleString() : t('never')
 )
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -354,7 +368,7 @@ function comparisonClass(value, positiveGood) {
 }
 
 function comparisonText(value) {
-    return `${value >= 0 ? '+' : ''}${value}% vs previous period`
+    return `${value >= 0 ? '+' : ''}${value}% ${t('vs_previous_period')}`
 }
 
 function csrfToken() {
@@ -369,8 +383,8 @@ function initCharts() {
         data: {
             labels: [],
             datasets: [
-                { label: 'Total Views',  data: [], borderColor: 'rgb(59, 130, 246)', tension: 0.1 },
-                { label: 'Unique Views', data: [], borderColor: 'rgb(16, 185, 129)', tension: 0.1 },
+                { label: t('total_views'),  data: [], borderColor: 'rgb(59, 130, 246)', tension: 0.1 },
+                { label: t('unique_views'), data: [], borderColor: 'rgb(16, 185, 129)', tension: 0.1 },
             ],
         },
         options: {
@@ -393,7 +407,7 @@ function initCharts() {
         type: 'bar',
         data: {
             labels: [],
-            datasets: [{ label: 'Visits', data: [], backgroundColor: 'rgb(59, 130, 246)' }],
+            datasets: [{ label: t('visits'), data: [], backgroundColor: 'rgb(59, 130, 246)' }],
         },
         options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y' },
     })

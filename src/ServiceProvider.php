@@ -48,6 +48,9 @@ class ServiceProvider extends AddonServiceProvider
 
     public function bootAddon()
     {
+        // Load translations
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'enhanced-analytics');
+
         // Publish configuration
         $this->publishes([
             __DIR__ . '/../config/enhanced-analytics.php' => config_path('enhanced-analytics.php'),
@@ -68,7 +71,7 @@ class ServiceProvider extends AddonServiceProvider
 
         // Register the nav item
         Nav::extend(function ($nav) {
-            $nav->create('Analytics')
+            $nav->create(__('enhanced-analytics::messages.nav_item'))
                 ->section('Tools')
                 ->route('enhanced-analytics.index')
                 ->icon('chart-monitoring-indicator');

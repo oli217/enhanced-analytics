@@ -120,9 +120,8 @@
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
                             <div>
-                                <h4 class="font-medium text-gray-900 dark:text-white">Essential Analytics</h4>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Basic visit tracking and performance
-                                    monitoring</p>
+                                <h4 class="font-medium text-gray-900 dark:text-white">{{ trans:enhanced-analytics::messages.essential_analytics }}</h4>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">{{ trans:enhanced-analytics::messages.essential_analytics_description }}</p>
                             </div>
                             <div class="relative">
                                 <input type="checkbox" checked disabled class="sr-only peer">
@@ -134,9 +133,8 @@
 
                         <div class="flex items-center justify-between">
                             <div>
-                                <h4 class="font-medium text-gray-900 dark:text-white">Geolocation Tracking</h4>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Track visitor locations for better
-                                    insights</p>
+                                <h4 class="font-medium text-gray-900 dark:text-white">{{ trans:enhanced-analytics::messages.geolocation_tracking }}</h4>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">{{ trans:enhanced-analytics::messages.geolocation_tracking_description }}</p>
                             </div>
                             <div class="relative">
                                 <button type="button" x-on:click="toggleGeolocation" role="switch"

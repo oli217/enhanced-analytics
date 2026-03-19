@@ -26,6 +26,7 @@ class AnalyticsDashboardController
                     'geoStats'   => cp_route('enhanced-analytics.geo-stats'),
                 ],
             ],
+            'translations' => trans('enhanced-analytics::messages'),
         ]);
     }
 
