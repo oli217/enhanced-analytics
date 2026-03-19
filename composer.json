@@ -1,5 +1,5 @@
 {
-    "name": "mohammedshuaau/enhanced-analytics",
+    "name": "oli217/enhanced-analytics",
     "description": "A powerful, efficient analytics solution for Statamic with real-time tracking, caching, and comprehensive dashboard visualization.",
     "type": "statamic-addon",
     "keywords": [
